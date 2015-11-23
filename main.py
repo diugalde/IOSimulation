@@ -1,3 +1,4 @@
+
 import time
 from services.simulator import Simulator
 from multiprocessing import Process
@@ -6,12 +7,12 @@ from multiprocessing import Process
 class Main:
 
     def main(self):
-        simulation_amount = 100000
+        simulation_amount = 1000
         simulator = Simulator()
         start = time.time()
         jobs = []
         for i in range(0, simulation_amount):
-            config = [100, 100, 100, 100]
+            config = [3, 7, 6, 1]
             pid = Process(target=simulator.simulate, args=(config, i))
             pid.start()
             jobs.append(pid)
@@ -23,5 +24,4 @@ class Main:
 
 s = Main()
 s.main()
-
 

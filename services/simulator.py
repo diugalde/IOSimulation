@@ -23,6 +23,7 @@ class Simulator:
         for i in range(0, 4):
             e = process_queue.get()
             simulation_results[e[0]-1] = e[1]
+        # print(simulation_results)
 
     def simulate_process(self, server_amount, phase, process_queue, simulation_number):
         package_amount = 1000
@@ -47,9 +48,9 @@ class Simulator:
         elif phase == 2:
             queue = self.generate_random_list(package_amount, lambda: random.normalvariate(85.8762728, 11.9313856926))
         elif phase == 3:
-            # queue = self.generate_random_list(package_amount, lambda: self.random_binomial(21, 0.495838))
+            # queue = self.generate_random_list(package_amount, lambda: np.random.binomial(21, 0.495838))
             np.random.seed(seed)
-            queue = self.generate_random_list(package_amount, lambda: self.random_poisson(10.4126))
+            queue = self.generate_random_list(package_amount, lambda: np.random.poisson(10.4126))
         elif phase == 4:
             queue = self.generate_random_list(package_amount, lambda: random.expovariate(0.03311214))
         return queue
@@ -60,12 +61,6 @@ class Simulator:
             r = dist()
             l.append(r)
         return l
-
-    def random_poisson(self, lamb):
-        return np.random.poisson(lamb, 1)[0]
-
-    def random_binomial(self, n, p):
-        return np.random.binomial(n, p, 1)[0]
 
     def get_config_cost(self, config):
         res = 0
