@@ -6,11 +6,17 @@ from multiprocessing import Process
 class Main:
 
     def main(self):
+        simulation_amount = 100000
         simulator = Simulator()
         start = time.time()
-        for i in range(0, 50):
-            config = [1000, 1000, 1000, 1000]
-            simulator.simulate(config)
+        jobs = []
+        for i in range(0, simulation_amount):
+            config = [100, 100, 100, 100]
+            pid = Process(target=simulator.simulate, args=(config, i))
+            pid.start()
+            jobs.append(pid)
+        for i in range(0, simulation_amount):
+            jobs[i].join()
         end = time.time()
         print("Duro: " + str(end-start))
 
