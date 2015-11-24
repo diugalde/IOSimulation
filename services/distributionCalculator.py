@@ -55,13 +55,6 @@ class DistributionCalculator:
         print()
 
     @staticmethod
-    def create_intervals(array, n):
-        res = []
-        quantity = Decimal(n)
-        for i in array:
-            res
-
-    @staticmethod
     def get_chi(observed_array, expected_array):
         n = len(observed_array)
         chi = 0
@@ -76,17 +69,11 @@ class DistributionCalculator:
         return median * (math.e ** (-median * x))
 
     @staticmethod
-    def binomial(x):
-        p = 10.4126/10000.0
-
-
-
-    @staticmethod
     def poisson(x, fact_array):
         lamb = 10.4126
         res = ((lamb**x) * (math.e ** -lamb))/(fact_array[x]+0.0)
         if x == 1:
-            print("Res:",end=" ")
+            print("Res:", end=" ")
             print(res*10000)
         return res
 
