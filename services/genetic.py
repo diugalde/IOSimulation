@@ -58,22 +58,9 @@ class Genetic(metaclass=ABCMeta):
                 best_ind = ind
         return [best_ind, grade]
 
-    def start(self, generations):
-        generations_copy = generations
-        size = 80
-        population = self.get_first_generation(size)
-        while generations > 0:
-            print("Generacion #" + str((generations_copy-generations)+1))
-            best_individual = self.get_best_individual(population)
-            self.best_individuals.append(best_individual)
-            population = self.get_next_generation(population, best_individual[0])
-            generations -= 1
-        optimum = self.get_optimum_individual()
-        optimum_cost = self.simulator.get_config_cost(optimum[0])
-        optimum_diff = 999999999.0/(optimum[1]*optimum_cost)
-        print("Optimum: " + str(optimum[0]))
-        print("Cost: " + str(optimum_cost))
-        print("Diff: " + str(optimum_diff))
+    @abstractmethod
+    def start(self):
+        pass
 
     def get_optimum_individual(self):
         best_grade = -10000

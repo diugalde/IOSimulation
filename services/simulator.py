@@ -7,7 +7,6 @@ class Simulator:
     def __init__(self):
         self.server_costs = [29.4, 28.3, 12.1, 69.6]
 
-    # config = [3, 3, 4, 6]
     def simulate(self, config, package_amount, simulation_number):
         process_queue = Queue()
         jobs = []
@@ -73,14 +72,12 @@ class Simulator:
         Phase #4: Exponential.  Lambda = 0.03311214
     """
     def generate_queue(self, package_amount, phase, seed):
-        np.random.seed(1)
-        random.seed(1)
         if phase == 1:
             queue = self.generate_random_list(package_amount, lambda: random.expovariate(0.07745307))
         elif phase == 2:
             queue = self.generate_random_list(package_amount, lambda: random.normalvariate(85.8762728, 11.9313856926))
         elif phase == 3:
-            #np.random.seed(seed)
+            np.random.seed(seed)
             queue = self.generate_random_list(package_amount, lambda: np.random.poisson(10.4126))
         elif phase == 4:
             queue = self.generate_random_list(package_amount, lambda: random.expovariate(0.03311214))

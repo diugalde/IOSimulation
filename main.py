@@ -1,9 +1,6 @@
-import random
 import time
-from services.distributionCalculator import DistributionCalculator
 from services.geneticLowestCost import GeneticLowestCost
 from services.simulator import Simulator
-from multiprocessing import Process
 
 
 class Main:
@@ -43,22 +40,25 @@ class Main:
         print("-------------------------------------------------------")
         print("Duro: " + str(end-start))
 
+    def third_objective(self):
+        start = time.time()
+        genetic = GeneticLowestVariance()
+        genetic.start(300)
+        end = time.time()
+        print("Duro: " + str(end-start))
+
     def main(self):
-        server_costs = [29.4, 28.3, 12.1, 69.6]
-        phase = 4
-        inc = 1
-        s = Simulator()
-        config = [107, 860, 235, 121]
-        initial_mean = 69331.61131299718
-        sr = s.simulate(config, 1000, 1)
-        mean = (sr[0] + sr[1] + sr[2] + sr[3]) / (1000.0*4)
-        diff = initial_mean-mean
-        grade = diff/(server_costs[phase-1]*inc)
-        print(grade)
-        print(mean)
+        print("Primer objetivo: ")
+        self.first_objective(1000)
+        print("_____________________________________________")
+        print("Segundo objetivo: ")
+        self.second_objective()
+        print("_____________________________________________")
+        print("Tercer objetivo: ")
+        self.third_objective()
+
 
 s = Main()
-s.second_objective()
-#s.main()
+s.main()
 
 
